@@ -57,5 +57,5 @@ void buscar();
 
 /* FUNCIONES */
 void crear_archivo() {
-
+        file = fopen("datos.hsp", "w+b");
 }
