@@ -41,6 +41,14 @@ typedef struct historial {
 void crear_archivo();
 void cerrar_archivo();
 
+//-- Interfaces
+void menu();
+void ejecutar(char tecla);
+
+
+//-- Godínez
+void insertar();
+void buscar();
 
 /* MAIN */
 
