@@ -17,14 +17,14 @@
 
 /* Estructuras */
 
-// Estructura del alojamiento
-typedef struct alojamiento {
+// Estructura del stay
+typedef struct stay {
         int id;
         char longitud[20];
         char latitud[20];
         char tipo[50];
         char fecha[50];
-} alojamiento;
+} stay;
 
 // Estructura de histoŕico
 typedef struct historial {
@@ -57,6 +57,13 @@ void buscar();
 
 /* FUNCIONES */
 void crear_archivo_aloj() {
-        file = fopen("datos.hsp", "w+b");
-        int tamanio = sizeof(struct alojamiento);
+        file = fopen("info.hsp", "w+b");
+        int tamanio = sizeof(struct stay);
+
+        FILE *main_file = fopen("datos.hsp", "r+b");
+
+        // Revisar si el archivo existe
+        if(main_file != NULL) {
+                struct stay * entidad = (struct stay *) malloc(tamanio);
+        }
 }
