@@ -40,8 +40,8 @@ FILE *file = NULL;
 /* Prototipos de funciones */
 
 //-- Archivos
-void crear_archivo();
-void cerrar_archivo();
+void crear_archivo_aloj();
+void cerrar_archivo_aloj();
 
 //-- Interfaces
 void menu();
@@ -56,6 +56,7 @@ void buscar();
 
 
 /* FUNCIONES */
-void crear_archivo() {
+void crear_archivo_aloj() {
         file = fopen("datos.hsp", "w+b");
+        int tamanio = sizeof(struct alojamiento);
 }
