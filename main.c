@@ -33,3 +33,16 @@ typedef struct historial {
         int calif;
         char fechas_disp[100];
 } historial;
+
+
+/* Prototipos de funciones */
+
+//-- Archivos
+void crear_archivo();
+void cerrar_archivo();
+
+
+/* MAIN */
+
+
+/* FUNCIONES */
