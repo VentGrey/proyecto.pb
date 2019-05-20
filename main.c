@@ -18,8 +18,18 @@
 /* Estructuras */
 
 // Estructura del alojamiento
-
 typedef struct alojamiento {
-    int id;
-    char
-}
+        int id;
+        char longitud[20];
+        char latitud[20];
+        char tipo[50];
+        char fecha[50];
+} alojamiento;
+
+// Estructura de histoŕico
+typedef struct historial {
+        int id;
+        float precio;
+        int calif;
+        char fechas_disp[100];
+} historial;
