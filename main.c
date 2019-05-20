@@ -34,6 +34,8 @@ typedef struct historial {
         char fechas_disp[100];
 } historial;
 
+// Archivo a guardar
+FILE *file = NULL;
 
 /* Prototipos de funciones */
 
@@ -54,3 +56,6 @@ void buscar();
 
 
 /* FUNCIONES */
+void crear_archivo() {
+
+}
