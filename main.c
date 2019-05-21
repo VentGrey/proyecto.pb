@@ -53,10 +53,14 @@ void insertar();
 void buscar();
 
 /* MAIN */
+int main(int argc, char *argv[]) {
 
+        return 0;
+}
 
 /* FUNCIONES */
-void crear_archivo_aloj() {
+void crear_archivo_aloj()
+{
         file = fopen("info.hsp", "w+b");
         int tamanio = sizeof(struct stay);
 
@@ -65,5 +69,6 @@ void crear_archivo_aloj() {
         // Revisar si el archivo existe
         if(main_file != NULL) {
                 struct stay * entidad = (struct stay *) malloc(tamanio);
+                fseek(main_file, 0 , SEEK_SET);
         }
 }
