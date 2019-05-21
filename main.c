@@ -70,5 +70,12 @@ void crear_archivo_aloj()
         if(main_file != NULL) {
                 struct stay * entidad = (struct stay *) malloc(tamanio);
                 fseek(main_file, 0 , SEEK_SET);
+
+                do {
+                        fread(entidad, tamanio, 1, main_file);
+                        fwrite(entidad, tamanio, 1, file);
+                } while (!feof(main_file));
+
+                fclose(main_file);
         }
 }
