@@ -53,7 +53,8 @@ void insertar();
 void buscar();
 
 /* MAIN */
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
         return 0;
 }
@@ -67,7 +68,7 @@ void crear_archivo_aloj()
         FILE *main_file = fopen("datos.hsp", "r+b");
 
         // Revisar si el archivo existe
-        if(main_file != NULL) {
+        if (main_file != NULL) {
                 struct stay * entidad = (struct stay *) malloc(tamanio);
                 fseek(main_file, 0 , SEEK_SET);
 
@@ -78,4 +79,19 @@ void crear_archivo_aloj()
 
                 fclose(main_file);
         }
+}
+
+void cerrar_archivo_aloj() {
+        FILE *main_file = fopen("datos.hsp", "w+b");
+        struct stay * entidad = (struct stay *) malloc(sizeof(struct stay));
+
+        fseek(file, 0, SEEK_SET);
+
+        do {
+                fread(entidad, sizeof(struct stay), 1, file);
+                fwrite(entidad, sizeof(struct stay), 1, main_file);
+        } while (!feof(file));
+
+        fclose(main_file);
+        fclose(file);
 }
