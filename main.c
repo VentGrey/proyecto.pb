@@ -50,7 +50,7 @@ void ejecutar(char tecla);
 
 //-- Godínez
 void insertar();
-void buscar();
+void mostrar();
 
 /* MAIN */
 int main(int argc, char *argv[])
@@ -94,4 +94,23 @@ void cerrar_archivo_aloj() {
 
         fclose(main_file);
         fclose(file);
+}
+
+void menu() {
+        char op;
+        while (op != 'S' && op != 's') {
+                printf("1 - Ingresar un alojamiento\n");
+                printf("2 - Mostrar un alojamiento\n");
+                printf("3 - Eliminar un alojamiento\n");
+                printf("4 - Mostrar todos los alojamientos registrados\n");
+                printf("5 - Ingresar un elemento en el historial\n");
+                printf("6 - Mostrar un elemento del historial\n");
+                printf("7 - Eliminar un elemento del historial");
+                printf("8 - Mostrar todos los elementos del historial");
+                scanf("%c", op);
+
+                if (op != 'S' && op != 's') {
+                        ejecutar(op);
+                }
+        }
 }
