@@ -9,7 +9,7 @@ typedef struct{
     float precio;
     float costo;
     char prov[30];
-}Producto;
+}Alojamiento;
 
 typedef struct{
     int codigo;
@@ -69,7 +69,7 @@ void menu(){
         printf("             -------------------------------------------\n");
         printf("             -------------------------------------------\n");
         printf("                          1) Presupuestos\n");
-        printf("                          2) Productos\n");
+        printf("                          2) Alojamientos\n");
         printf("                          3) Proveedores\n");
         printf("                          4) Clientes\n");
         printf("                          5) Salir\n");
@@ -262,8 +262,8 @@ void BajaPresu(){
 
 void AltaProds(){
     FILE *pf;
-    Producto prod;
-    pf = fopen("Productos.dat","ab");
+    Alojamiento prod;
+    pf = fopen("Alojamientos.dat","ab");
     printf("Ingrese Codigo\n");
     scanf("%i",&prod.codigo);
     printf("Ingrese Detalle\n");
@@ -275,7 +275,7 @@ void AltaProds(){
     printf("Ingrese Proveedor\n");
     scanf("%s",prod.prov);
     fseek(pf,0L,SEEK_END);
-    fwrite(&prod,sizeof(Producto),1,pf);
+    fwrite(&prod,sizeof(Alojamiento),1,pf);
     fclose(pf);
     system("clear");
     menu();
@@ -283,29 +283,29 @@ void AltaProds(){
 
 void ListadoProds(){
     FILE *pf;
-    Producto prod;
-    pf = fopen("Productos.dat","rb");
-    fread(&prod,sizeof(Producto),1,pf);
+    Alojamiento prod;
+    pf = fopen("Alojamientos.dat","rb");
+    fread(&prod,sizeof(Alojamiento),1,pf);
     while(!feof(pf)){
         printf("%i ; %s ; %.2f ; %.2f ; %s\n",prod.codigo,prod.detalle,prod.precio,prod.costo,prod.prov);
-        fread(&prod,sizeof(Producto),1,pf);
+        fread(&prod,sizeof(Alojamiento),1,pf);
     }
     fclose(pf);
 }
 
 void ModifProds(){
     FILE *pf,*pfaux;
-    Producto prod;
+    Alojamiento prod;
     int codigoaux;
-    pf = fopen("Productos.dat","rb");
-    pfaux = fopen("Productosaux.dat","ab");
+    pf = fopen("Alojamientos.dat","rb");
+    pfaux = fopen("Alojamientosaux.dat","ab");
     printf("Ingrese Código\n");
     scanf("%i",&codigoaux);
-    fread(&prod,sizeof(Producto),1,pf);
+    fread(&prod,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
                 if (prod.codigo != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&prod,sizeof(Producto),1,pfaux);
+                    fwrite(&prod,sizeof(Alojamiento),1,pfaux);
                 }else{
                     printf("Ingrese Detalle\n");
                     scanf("%s",prod.detalle);
@@ -316,34 +316,34 @@ void ModifProds(){
                     printf("Ingrese Proveedor\n");
                     scanf("%s",prod.prov);
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&prod,sizeof(Producto),1,pfaux);
+                    fwrite(&prod,sizeof(Alojamiento),1,pfaux);
                 }
-            fread(&prod,sizeof(Producto),1,pf);
+            fread(&prod,sizeof(Alojamiento),1,pf);
         }
     fclose(pf);
     fclose(pfaux);
-    remove("Productos.dat");
-    rename("Productosaux.dat","Productos.dat");
+    remove("Alojamientos.dat");
+    rename("Alojamientosaux.dat","Alojamientos.dat");
 }
 
 void BajaProds(){
     FILE *pf,*pfaux;
-    Producto prod;
+    Alojamiento prod;
     int codigoaux;
-    pf = fopen("Productos.dat","rb");
-    pfaux = fopen("Productosaux.dat","ab");
+    pf = fopen("Alojamientos.dat","rb");
+    pfaux = fopen("Alojamientosaux.dat","ab");
     printf("Ingrese Código\n");
     scanf("%i",&codigoaux);
-    fread(&prod,sizeof(Producto),1,pf);
+    fread(&prod,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
                 if (prod.codigo != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&prod,sizeof(Producto),1,pfaux);
+                    fwrite(&prod,sizeof(Alojamiento),1,pfaux);
                 }
-            fread(&prod,sizeof(Producto),1,pf);
+            fread(&prod,sizeof(Alojamiento),1,pf);
         }
     fclose(pf);
     fclose(pfaux);
-    remove("Productos.dat");
-    rename("Productosaux.dat","Productos.dat");
+    remove("Alojamientos.dat");
+    rename("Alojamientosaux.dat","Alojamientos.dat");
 }
