@@ -171,7 +171,8 @@ void AltaAlojs(){
     fseek(pf,0L,SEEK_END);
     fwrite(&stay,sizeof(Alojamiento),1,pf);
     fclose(pf);
-    system("clear");
+    // -- Imprimir vergos de newlines para "simular" un clearscreen;
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n");
     menu();
 }
 
