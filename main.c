@@ -37,23 +37,23 @@ void ListadoHist();
 
 // -- Función main
 int main(){
-    menu();
-    return 0;
+        menu();
+        return 0;
 }
 
 void menu(){
-    int opcion,opcion2;
-    do{
-        printf("             ---------------HOSPEDATE-------------------\n");
-        printf("             -------------------------------------------\n");
-        printf("                          1) Alojamientos\n");
-        printf("                          2) Histórico\n");
-        printf("                          3) Salir\n");
-        printf("             -------------------------------------------\n");
-        printf("             -------------------------------------------\n");
-        scanf("%d",&opcion);
-        system("clear");
-        printf("             -------------------------------------------\n");
+        int opcion,opcion2;
+        do{
+                printf("---------------HOSPEDATE--------------\n");
+                printf("--------------------------------------\n");
+                printf("           1) Alojamientos            \n");
+                printf("           2) Histórico               \n");
+                printf("           3) Salir                   \n");
+                printf("--------------------------------------\n");
+                printf("--------------------------------------\n");
+                scanf("%d",&opcion);
+                printf("\n\n\n\n\n\n\n\n\n\n\n\n");
+                printf("     ---        ----------------------------------------\n");
         printf("             -------------------------------------------\n");
         printf("                          1) Alta\n");
         printf("                          2) Baja\n");
@@ -191,7 +191,7 @@ void BajaAlojs(){
     int codigoaux;
     pf = fopen("Alojamientos.dat","rb");
     pfaux = fopen("Alojamientosaux.dat","ab");
-    printf("Ingrese Código\n");
+    printf("Ingrese el ID a buscar\n");
     scanf("%i",&codigoaux);
     fread(&stay,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
@@ -292,7 +292,7 @@ void BajaHist(){
     int codigoaux;
     pf = fopen("Historicos.dat","rb");
     pfaux = fopen("Historicosaux.dat","ab");
-    printf("Ingrese Código\n");
+    printf("Ingrese el ID a buscar\n");
     scanf("%i",&codigoaux);
     fread(&hist,sizeof(Historico),1,pf);
         while (!feof(pf)){
