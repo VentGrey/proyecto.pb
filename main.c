@@ -64,50 +64,50 @@ void menu(){
                 printf(" -------------------------------------\n");
                 scanf("%d",&opcion2);
                 printf("\n\n\n\n\n\n\n\n\n\n\n\n");
-        switch (opcion) {
-        case 1:
-                        switch(opcion2){
-                            case 1:
+
+                switch (opcion) {
+                case 1:
+                        switch(opcion2) {
+                        case 1:
                                 AltaAlojs();
                                 break;
-                            case 2:
+                        case 2:
                                 BajaAlojs();
                                 break;
-                            case 3:
+                        case 3:
                                 ModifAlojs();
                                 break;
-                            case 4:
+                        case 4:
                                 ListadoAlojs();
                                 break;
-                            case 5:
+                        case 5:
                                 menu();
                                 break;
                         }
-                    break;
-
-        case 2:
-                switch(opcion2){
-                case 1:
-                        AltaHist();
                         break;
                 case 2:
-                        BajaHist();
+                        switch(opcion2){
+                        case 1:
+                                AltaHist();
+                                break;
+                        case 2:
+                                BajaHist();
+                                break;
+                        case 3:
+                                ModifHist();
+                                break;
+                        case 4:
+                                ListadoHist();
+                                break;
+                        case 5:
+                                menu();
+                                break;
+                        }
                         break;
                 case 3:
-                        ModifHist();
-                        break;
-                case 4:
-                        ListadoHist();
-                        break;
-                case 5:
-                        menu();
                         break;
                 }
-                break;
-        case 3:
-                break;
-        }
-    }while (opcion!=5);
+        }while (opcion!=5);
 }
 
 // ------------ INICIO DE CRUD ALOJAMIENTOS --------------------------
