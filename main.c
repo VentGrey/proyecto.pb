@@ -17,7 +17,7 @@ typedef struct{
 typedef struct{
         int id;
         double precio;
-        int calificación;
+        int calificacion;
         char fecha[30];
 }Historico;
 
@@ -44,16 +44,18 @@ int main(){
 void menu(){
     int opcion,opcion2;
     do{
-        printf("             ------------------HOSPEDATE----------------\n");
         printf("             -------------------------------------------\n");
-        printf("                          1) Alojamientos\n");
-        printf("                          2) Historico\n");
-        printf("                          3) Salir\n");
+        printf("             -------------------------------------------\n");
+        printf("                          1) Presupuestos\n");
+        printf("                          2) Productos\n");
+        printf("                          3) Proveedores\n");
+        printf("                          4) Clientes\n");
+        printf("                          5) Salir\n");
         printf("             -------------------------------------------\n");
         printf("             -------------------------------------------\n");
         scanf("%d",&opcion);
         system("clear");
-        printf("             ----------------ADMIN v0.1.0---------------\n");
+        printf("             -------------------------------------------\n");
         printf("             -------------------------------------------\n");
         printf("                          1) Alta\n");
         printf("                          2) Baja\n");
@@ -68,16 +70,16 @@ void menu(){
                 case 1:
                         switch(opcion2){
                             case 1:
-                                AltaAlojs();
+                                AltaPresu();
                                 break;
                             case 2:
-                                BajaAlojs();
+                                BajaPresu();
                                 break;
                             case 3:
-                                ModifAlojs();
+                                ModifPresu();
                                 break;
                             case 4:
-                                ListadoAlojs();
+                                ListadoPresu();
                                 break;
                             case 5:
                                 menu();
@@ -87,16 +89,16 @@ void menu(){
                 case 2:
                         switch(opcion2){
                             case 1:
-                                AltaAlojs();
+                                AltaProds();
                                 break;
                             case 2:
-                                BajaAlojs();
+                                BajaProds();
                                 break;
                             case 3:
-                                ModifAlojs();
+                                ModifProds();
                                 break;
                             case 4:
-                                ListadoAlojs();
+                                ListadoProds();
                                 break;
                             case 5:
                                 menu();
@@ -106,16 +108,16 @@ void menu(){
                 case 3:
                         switch(opcion2){
                             case 1:
-                                //AltaHist();
+                                //AltaProvs();
                                 break;
                             case 2:
-                                //BajaHist();
+                                //BajaProvs();
                                 break;
                             case 3:
-                                //ModifHist();
+                                //ModifProvs();
                                 break;
                             case 4:
-                                //ListadoHist();
+                                //ListadoProvs();
                                 break;
                             case 5:
                                 menu();
@@ -147,6 +149,8 @@ void menu(){
             }
     }while (opcion!=5);
 }
+
+// ------------ INICIO DE CRUD ALOJAMIENTOS --------------------------
 
 void AltaAlojs(){
     FILE *pf;
@@ -182,7 +186,7 @@ void ListadoAlojs(){
     pf = fopen("Alojamientos.dat","rb");
     fread(&stay,sizeof(Alojamiento),1,pf);
     while(!feof(pf)){
-        printf("%i ; %s ; %.2f ; %.2f ; %s\n",stay.codigo,stay.detalle,stay.precio,stay.costo,stay.prov);
+        printf("%i ; %s ; %s ; %s ; %s\n",stay.id,stay.latitud,stay.longitud,stay.tipo,stay.fecha);
         fread(&stay,sizeof(Alojamiento),1,pf);
     }
     fclose(pf);
@@ -198,18 +202,18 @@ void ModifAlojs(){
     scanf("%i",&codigoaux);
     fread(&stay,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
-                if (stay.codigo != codigoaux){
+                if (stay.id != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
                     fwrite(&stay,sizeof(Alojamiento),1,pfaux);
                 }else{
-                    printf("Ingrese Detalle\n");
-                    scanf("%s",stay.detalle);
-                    printf("Ingrese Precio\n");
-                    scanf("%f",&stay.precio);
-                    printf("Ingrese Costo\n");
-                    scanf("%f",&stay.costo);
-                    printf("Ingrese Proveedor\n");
-                    scanf("%s",stay.prov);
+                    printf("Ingrese la latitud\n");
+                    scanf("%s",stay.latitud);
+                    printf("Ingrese la longitud\n");
+                    scanf("%s",&stay.longitud);
+                    printf("Ingrese el tipo\n");
+                    scanf("%s",&stay.tipo);
+                    printf("Ingrese la fecha\n");
+                    scanf("%s",stay.fecha);
                     fseek(pfaux,0l,SEEK_END);
                     fwrite(&stay,sizeof(Alojamiento),1,pfaux);
                 }
@@ -231,7 +235,7 @@ void BajaAlojs(){
     scanf("%i",&codigoaux);
     fread(&stay,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
-                if (stay.codigo != codigoaux){
+                if (stay.id != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
                     fwrite(&stay,sizeof(Alojamiento),1,pfaux);
                 }
@@ -242,3 +246,108 @@ void BajaAlojs(){
     remove("Alojamientos.dat");
     rename("Alojamientosaux.dat","Alojamientos.dat");
 }
+
+// ------------ FIN DE CRUD ALOJAMIENTOS --------------------------
+
+
+// ------------ INICIO DE CRUD HISTÓRICO --------------------------
+void AltaHist(){
+    FILE *pf;
+    Historico hist;
+    pf = fopen("historico.dat","ab");
+
+    printf("Ingrese el id del historico\n");
+    scanf("%i" ,&hist.id);
+
+    printf("Ingrese el precio de la estancia\n");
+    scanf("%lf", &hist.precio);
+
+    printf("Ingrese la calificación del lugar (1 - 5)\n");
+    scanf("%i", &hist.calificacion);
+
+    // Revisar que el usuario no se salga de la calificación
+    if (hist.calificacion > 5 || hist.calificacion <= 0) {
+        printf("La calificación ingresada es errónea");
+        return;
+    }
+
+    printf("Ingrese la fecha en la que el alojamiento será realizado\n");
+    scanf("%s", &hist.fecha);
+
+    fseek(pf,0L,SEEK_END);
+    fwrite(&hist,sizeof(Historico),1,pf);
+    fclose(pf);
+    // -- Imprimir vergos de newlines para "simular" un clearscreen;
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n");
+    menu();
+}
+
+void ListadoHist(){
+    FILE *pf;
+    Historico hist;
+    pf = fopen("Alojamientos.dat","rb");
+    fread(&hist,sizeof(Alojamiento),1,pf);
+    while(!feof(pf)){
+        printf("%i ; %lf ; %i ; %s ;\n",hist.id, hist.precio,
+               hist.calificacion,  hist.fecha);
+        fread(&hist,sizeof(Alojamiento),1,pf);
+    }
+    fclose(pf);
+}
+
+void ModifHist(){
+    FILE *pf,*pfaux;
+    Alojamiento stay;
+    int codigoaux;
+    pf = fopen("Alojamientos.dat","rb");
+    pfaux = fopen("Alojamientosaux.dat","ab");
+    printf("Ingrese Código\n");
+    scanf("%i",&codigoaux);
+    fread(&stay,sizeof(Alojamiento),1,pf);
+        while (!feof(pf)){
+                if (stay.id != codigoaux){
+                    fseek(pfaux,0l,SEEK_END);
+                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
+                }else{
+                    printf("Ingrese la latitud\n");
+                    scanf("%s",stay.latitud);
+                    printf("Ingrese la longitud\n");
+                    scanf("%s",&stay.longitud);
+                    printf("Ingrese el tipo\n");
+                    scanf("%s",&stay.tipo);
+                    printf("Ingrese la fecha\n");
+                    scanf("%s",stay.fecha);
+                    fseek(pfaux,0l,SEEK_END);
+                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
+                }
+            fread(&stay,sizeof(Alojamiento),1,pf);
+        }
+    fclose(pf);
+    fclose(pfaux);
+    remove("Alojamientos.dat");
+    rename("Alojamientosaux.dat","Alojamientos.dat");
+}
+
+void BajaHist(){
+    FILE *pf,*pfaux;
+    Alojamiento stay;
+    int codigoaux;
+    pf = fopen("Alojamientos.dat","rb");
+    pfaux = fopen("Alojamientosaux.dat","ab");
+    printf("Ingrese Código\n");
+    scanf("%i",&codigoaux);
+    fread(&stay,sizeof(Alojamiento),1,pf);
+        while (!feof(pf)){
+                if (stay.id != codigoaux){
+                    fseek(pfaux,0l,SEEK_END);
+                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
+                }
+            fread(&stay,sizeof(Alojamiento),1,pf);
+        }
+    fclose(pf);
+    fclose(pfaux);
+    remove("Alojamientos.dat");
+    rename("Alojamientosaux.dat","Alojamientos.dat");
+}
+
+// ------------ FIN DE CRUD HISTÓRICO --------------------------
