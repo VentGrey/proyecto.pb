@@ -4,18 +4,18 @@
 void menu();
 
 typedef struct{
-    int codigo;
-    char detalle[30];
-    float precio;
-    float costo;
-    char prov[30];
+        int id;
+        char latitud[20];
+        char longitud[20];
+        char tipo[20];
+        char fecha[30];
 }Alojamiento;
 
 typedef struct{
-    int codigo;
-    char nombre[30];
-    char telefono[30];
-    char email[30];
+    int id;
+    double precio;
+    int calificación;
+    char fecha[30];
 }Historico;
 
 typedef struct{
