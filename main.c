@@ -1,6 +1,11 @@
+// -- Inclusión de cabeceras
 #include <stdio.h>
 #include <stdlib.h>
 
+
+// -- Estrucuras
+// Es una herejía usar el typedef aquí, pero por cuestiones de tiempo y
+// maleabilidad será mejor.
 typedef struct{
         int id;
         char latitud[20];
@@ -18,19 +23,19 @@ typedef struct{
 
 void menu();
 
-//-- Prototipos de alojamiento
+// -- Prototipos de alojamiento
 void AltaAlojs();
 void BajaAlojs();
 void ModifAlojs();
 void ListadoAlojs();
 
-//-- Prototipos de histórico
+// -- Prototipos de histórico
 void AltaHist();
 void BajaHist();
 void ModifHist();
 void ListadoHist();
 
-
+// -- Función main
 int main(){
     menu();
     return 0;
@@ -41,11 +46,9 @@ void menu(){
     do{
         printf("             -------------------------------------------\n");
         printf("             -------------------------------------------\n");
-        printf("                          1) Presupuestos\n");
-        printf("                          2) Alojamientos\n");
-        printf("                          3) Historico\n");
-        printf("                          4) Clientes\n");
-        printf("                          5) Salir\n");
+        printf("                          1) Alojamientos\n");
+        printf("                          2) Historico\n");
+        printf("                          3) Salir\n");
         printf("             -------------------------------------------\n");
         printf("             -------------------------------------------\n");
         scanf("%d",&opcion);
@@ -65,16 +68,16 @@ void menu(){
                 case 1:
                         switch(opcion2){
                             case 1:
-                                AltaPresu();
+                                AltaAlojs();
                                 break;
                             case 2:
-                                BajaPresu();
+                                BajaAlojs();
                                 break;
                             case 3:
-                                ModifPresu();
+                                ModifAlojs();
                                 break;
                             case 4:
-                                ListadoPresu();
+                                ListadoAlojs();
                                 break;
                             case 5:
                                 menu();
@@ -145,90 +148,22 @@ void menu(){
     }while (opcion!=5);
 }
 
-
-void ListadoPresu(){
-    FILE *pf;
-    Presupuesto presu;
-    pf = fopen("Presupuesto.dat","rb");
-    fread(&presu,sizeof(Presupuesto),1,pf);
-    while(!feof(pf)){
-        printf("%i ; %s ; %s ; %.2f ; %.2f\n",presu.codigo,presu.fecha,presu.cuit,presu.total,presu.descuento);
-        fread(&presu,sizeof(Presupuesto),1,pf);
-    }
-    fclose(pf);
-}
-
-void ModifPresu(){
-    FILE *pf,*pfaux;
-    Presupuesto presu;
-    int codigoaux;
-    pf = fopen("Presupuesto.dat","rb");
-    pfaux = fopen("Presupuestoaux.dat","ab");
-    printf("Ingrese Código\n");
-    scanf("%i",&codigoaux);
-    fread(&presu,sizeof(Presupuesto),1,pf);
-        while (!feof(pf)){
-                if (presu.codigo != codigoaux){
-                    fseek(pfaux,0l,SEEK_END);
-                    fwrite(&presu,sizeof(Presupuesto),1,pfaux);
-                }else{
-                    printf("Ingrese Fecha\n");
-                    scanf("%s",presu.fecha);
-                    printf("Ingrese CUIT\n");
-                    scanf("%s",presu.cuit);
-                    printf("Ingrese Total\n");
-                    scanf("%f",&presu.total);
-                    printf("Ingrese Descuento\n");
-                    scanf("%f",&presu.descuento);
-                    fseek(pfaux,0l,SEEK_END);
-                    fwrite(&presu,sizeof(Presupuesto),1,pfaux);
-                }
-            fread(&presu,sizeof(Presupuesto),1,pf);
-        }
-    fclose(pf);
-    fclose(pfaux);
-    remove("Presupuesto.dat");
-    rename("Presupuestoaux.dat","Presupuesto.dat");
-}
-
-void BajaPresu(){
-    FILE *pf,*pfaux;
-    Presupuesto presu;
-    int codigoaux;
-    pf = fopen("Presupuesto.dat","rb");
-    pfaux = fopen("Presupuestoaux.dat","ab");
-    printf("Ingrese Código\n");
-    scanf("%i",&codigoaux);
-    fread(&presu,sizeof(Presupuesto),1,pf);
-        while (!feof(pf)){
-                if (presu.codigo != codigoaux){
-                    fseek(pfaux,0l,SEEK_END);
-                    fwrite(&presu,sizeof(Presupuesto),1,pfaux);
-                }
-            fread(&presu,sizeof(Presupuesto),1,pf);
-        }
-    fclose(pf);
-    fclose(pfaux);
-    remove("Presupuesto.dat");
-    rename("Presupuestoaux.dat","Presupuesto.dat");
-}
-
 void AltaAlojs(){
     FILE *pf;
-    Alojamiento prod;
+    Alojamiento stay;
     pf = fopen("Alojamientos.dat","ab");
     printf("Ingrese Codigo\n");
-    scanf("%i",&prod.codigo);
+    scanf("%i",&stay.codigo);
     printf("Ingrese Detalle\n");
-    scanf("%s",prod.detalle);
+    scanf("%s",stay.detalle);
     printf("Ingrese Precio\n");
-    scanf("%f",&prod.precio);
+    scanf("%f",&stay.precio);
     printf("Ingrese Costo\n");
-    scanf("%f",&prod.costo);
+    scanf("%f",&stay.costo);
     printf("Ingrese Proveedor\n");
-    scanf("%s",prod.prov);
+    scanf("%s",stay.prov);
     fseek(pf,0L,SEEK_END);
-    fwrite(&prod,sizeof(Alojamiento),1,pf);
+    fwrite(&stay,sizeof(Alojamiento),1,pf);
     fclose(pf);
     system("clear");
     menu();
@@ -236,42 +171,42 @@ void AltaAlojs(){
 
 void ListadoAlojs(){
     FILE *pf;
-    Alojamiento prod;
+    Alojamiento stay;
     pf = fopen("Alojamientos.dat","rb");
-    fread(&prod,sizeof(Alojamiento),1,pf);
+    fread(&stay,sizeof(Alojamiento),1,pf);
     while(!feof(pf)){
-        printf("%i ; %s ; %.2f ; %.2f ; %s\n",prod.codigo,prod.detalle,prod.precio,prod.costo,prod.prov);
-        fread(&prod,sizeof(Alojamiento),1,pf);
+        printf("%i ; %s ; %.2f ; %.2f ; %s\n",stay.codigo,stay.detalle,stay.precio,stay.costo,stay.prov);
+        fread(&stay,sizeof(Alojamiento),1,pf);
     }
     fclose(pf);
 }
 
 void ModifAlojs(){
     FILE *pf,*pfaux;
-    Alojamiento prod;
+    Alojamiento stay;
     int codigoaux;
     pf = fopen("Alojamientos.dat","rb");
     pfaux = fopen("Alojamientosaux.dat","ab");
     printf("Ingrese Código\n");
     scanf("%i",&codigoaux);
-    fread(&prod,sizeof(Alojamiento),1,pf);
+    fread(&stay,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
-                if (prod.codigo != codigoaux){
+                if (stay.codigo != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&prod,sizeof(Alojamiento),1,pfaux);
+                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
                 }else{
                     printf("Ingrese Detalle\n");
-                    scanf("%s",prod.detalle);
+                    scanf("%s",stay.detalle);
                     printf("Ingrese Precio\n");
-                    scanf("%f",&prod.precio);
+                    scanf("%f",&stay.precio);
                     printf("Ingrese Costo\n");
-                    scanf("%f",&prod.costo);
+                    scanf("%f",&stay.costo);
                     printf("Ingrese Proveedor\n");
-                    scanf("%s",prod.prov);
+                    scanf("%s",stay.prov);
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&prod,sizeof(Alojamiento),1,pfaux);
+                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
                 }
-            fread(&prod,sizeof(Alojamiento),1,pf);
+            fread(&stay,sizeof(Alojamiento),1,pf);
         }
     fclose(pf);
     fclose(pfaux);
@@ -281,19 +216,19 @@ void ModifAlojs(){
 
 void BajaAlojs(){
     FILE *pf,*pfaux;
-    Alojamiento prod;
+    Alojamiento stay;
     int codigoaux;
     pf = fopen("Alojamientos.dat","rb");
     pfaux = fopen("Alojamientosaux.dat","ab");
     printf("Ingrese Código\n");
     scanf("%i",&codigoaux);
-    fread(&prod,sizeof(Alojamiento),1,pf);
+    fread(&stay,sizeof(Alojamiento),1,pf);
         while (!feof(pf)){
-                if (prod.codigo != codigoaux){
+                if (stay.codigo != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&prod,sizeof(Alojamiento),1,pfaux);
+                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
                 }
-            fread(&prod,sizeof(Alojamiento),1,pf);
+            fread(&stay,sizeof(Alojamiento),1,pf);
         }
     fclose(pf);
     fclose(pfaux);
