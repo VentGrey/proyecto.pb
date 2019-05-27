@@ -43,14 +43,20 @@ FILE *file = NULL;
 void crear_archivo_aloj();
 void cerrar_archivo_aloj();
 
+void crear_archivo_hist();
+void cerrar_archivo_hist();
+
 //-- Interfaces
 void menu();
 void ejecutar(char tecla);
 
 
 //-- Godínez
-void insertar();
-void mostrar();
+void insertar_aloj();
+void mostrar_aloj();
+
+void insertar_hist();
+void mostrar_hist();
 
 /* MAIN */
 int main(int argc, char *argv[])
@@ -114,5 +120,11 @@ void menu() {
                 if (op != 'S' && op != 's') {
                         ejecutar(op);
                 }
+        }
+}
+
+void ejecutar(char tecla) {
+        if (tecla == '1') {
+
         }
 }
