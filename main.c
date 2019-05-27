@@ -44,7 +44,7 @@ int main(){
 void menu(){
     int opcion,opcion2;
     do{
-        printf("             -------------------------------------------\n");
+        printf("             ------------------HOSPEDATE----------------\n");
         printf("             -------------------------------------------\n");
         printf("                          1) Alojamientos\n");
         printf("                          2) Historico\n");
@@ -53,7 +53,7 @@ void menu(){
         printf("             -------------------------------------------\n");
         scanf("%d",&opcion);
         system("clear");
-        printf("             -------------------------------------------\n");
+        printf("             ----------------ADMIN v0.1.0---------------\n");
         printf("             -------------------------------------------\n");
         printf("                          1) Alta\n");
         printf("                          2) Baja\n");
@@ -152,16 +152,22 @@ void AltaAlojs(){
     FILE *pf;
     Alojamiento stay;
     pf = fopen("Alojamientos.dat","ab");
-    printf("Ingrese Codigo\n");
-    scanf("%i",&stay.codigo);
-    printf("Ingrese Detalle\n");
-    scanf("%s",stay.detalle);
-    printf("Ingrese Precio\n");
-    scanf("%f",&stay.precio);
-    printf("Ingrese Costo\n");
-    scanf("%f",&stay.costo);
-    printf("Ingrese Proveedor\n");
-    scanf("%s",stay.prov);
+
+    printf("Ingrese el id del alojamiento\n");
+    scanf("%i" ,&stay.id);
+
+    printf("Ingrese la latitud del lugar\n");
+    scanf("%s", &stay.latitud);
+
+    printf("Ingrese la longitud\n");
+    scanf("%s", &stay.longitud);
+
+    printf("Ingrese el tipo de alojamiento (Casa, Departamento, Cuarto, etc)\n");
+    scanf("%s", &stay.tipo);
+
+    printf("Ingrese la fecha en la que el alojamiento será realizado\n");
+    scanf("%s", &stay.fecha);
+
     fseek(pf,0L,SEEK_END);
     fwrite(&stay,sizeof(Alojamiento),1,pf);
     fclose(pf);
