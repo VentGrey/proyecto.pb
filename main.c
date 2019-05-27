@@ -53,17 +53,17 @@ void menu(){
                 printf("--------------------------------------\n");
                 scanf("%d",&opcion);
                 printf("\n\n\n\n\n\n\n\n\n\n\n\n");
-                printf("     ---        ----------------------------------------\n");
-        printf("             -------------------------------------------\n");
-        printf("                          1) Alta\n");
-        printf("                          2) Baja\n");
-        printf("                          3) Modificación\n");
-        printf("                          4) Listado\n");
-        printf("                          5) Volver al Menú\n");
-        printf("             -------------------------------------------\n");
-        printf("             -------------------------------------------\n");
-        scanf("%d",&opcion2);
-        system("clear");
+                printf("---------------HOSPEDATE--------------\n");
+                printf("--------------------------------------\n");
+                printf("           1) Alta                    \n");
+                printf("           2) Baja                    \n");
+                printf("           3) Modificación            \n");
+                printf("           4) Listado                 \n");
+                printf("           5) Volver al Menú          \n");
+                printf("--------------------------------------\n");
+                printf(" -------------------------------------\n");
+                scanf("%d",&opcion2);
+                printf("\n\n\n\n\n\n\n\n\n\n\n\n");
         switch (opcion) {
         case 1:
                         switch(opcion2){
