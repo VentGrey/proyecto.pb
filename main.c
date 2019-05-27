@@ -99,10 +99,12 @@ void cerrar_archivo_aloj() {
 void menu() {
         char op;
         while (op != 'S' && op != 's') {
+                printf("---- ALOJAMIENTOS -----\n");
                 printf("1 - Ingresar un alojamiento\n");
                 printf("2 - Mostrar un alojamiento\n");
                 printf("3 - Eliminar un alojamiento\n");
                 printf("4 - Mostrar todos los alojamientos registrados\n");
+                printf("---- HISTORIAL -------\n");
                 printf("5 - Ingresar un elemento en el historial\n");
                 printf("6 - Mostrar un elemento del historial\n");
                 printf("7 - Eliminar un elemento del historial");
