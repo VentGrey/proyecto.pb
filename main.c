@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu();
-
 typedef struct{
         int id;
         char latitud[20];
@@ -12,40 +10,14 @@ typedef struct{
 }Alojamiento;
 
 typedef struct{
-    int id;
-    double precio;
-    int calificación;
-    char fecha[30];
+        int id;
+        double precio;
+        int calificación;
+        char fecha[30];
 }Historico;
 
-typedef struct{
-    char cuit[30];
-    char cliente[30];
-    char fechaalta[11];
-    char email[30];
-    char telefono[30];
-}Clientes;
-
-typedef struct{
-    int codigo;
-    char fecha[11];
-    char cuit[30];
-    float total;
-    float descuento;
-}Presupuesto;
-
-typedef struct{
-    int codigo;
-    char producto[30];
-    int cantidad;
-    float precio;
-}DetPresupuesto;
-
-void AltaPresu();
-void BajaPresu();
-void ModifPresu();
-void ListadoPresu();
-void AltaProds();
+void menu();
+void AltaAlojs();
 void BajaProds();
 void ModifProds();
 void ListadoProds();
@@ -53,10 +25,7 @@ void AltaProvs();
 void BajaProvs();
 void ModifProvs();
 void ListadoProvs();
-void AltaClientes();
-void BajaClientes();
-void ModifClientes();
-void ListadoClientes();
+
 
 int main(){
     menu();
@@ -111,7 +80,7 @@ void menu(){
                 case 2:
                         switch(opcion2){
                             case 1:
-                                AltaProds();
+                                AltaAlojs();
                                 break;
                             case 2:
                                 BajaProds();
@@ -260,7 +229,7 @@ void BajaPresu(){
     rename("Presupuestoaux.dat","Presupuesto.dat");
 }
 
-void AltaProds(){
+void AltaAlojs(){
     FILE *pf;
     Alojamiento prod;
     pf = fopen("Alojamientos.dat","ab");
