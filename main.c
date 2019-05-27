@@ -16,7 +16,7 @@ typedef struct{
     char nombre[30];
     char telefono[30];
     char email[30];
-}Proveedores;
+}Historico;
 
 typedef struct{
     char cuit[30];
@@ -70,7 +70,7 @@ void menu(){
         printf("             -------------------------------------------\n");
         printf("                          1) Presupuestos\n");
         printf("                          2) Alojamientos\n");
-        printf("                          3) Proveedores\n");
+        printf("                          3) Historico\n");
         printf("                          4) Clientes\n");
         printf("                          5) Salir\n");
         printf("             -------------------------------------------\n");
