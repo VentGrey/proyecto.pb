@@ -17,14 +17,18 @@ typedef struct{
 }Historico;
 
 void menu();
+
+//-- Prototipos de alojamiento
 void AltaAlojs();
-void BajaProds();
-void ModifProds();
-void ListadoProds();
-void AltaProvs();
-void BajaProvs();
-void ModifProvs();
-void ListadoProvs();
+void BajaAlojs();
+void ModifAlojs();
+void ListadoAlojs();
+
+//-- Prototipos de histórico
+void AltaHist();
+void BajaHist();
+void ModifHist();
+void ListadoHist();
 
 
 int main(){
@@ -83,13 +87,13 @@ void menu(){
                                 AltaAlojs();
                                 break;
                             case 2:
-                                BajaProds();
+                                BajaAlojs();
                                 break;
                             case 3:
-                                ModifProds();
+                                ModifAlojs();
                                 break;
                             case 4:
-                                ListadoProds();
+                                ListadoAlojs();
                                 break;
                             case 5:
                                 menu();
@@ -99,16 +103,16 @@ void menu(){
                 case 3:
                         switch(opcion2){
                             case 1:
-                                //AltaProvs();
+                                //AltaHist();
                                 break;
                             case 2:
-                                //BajaProvs();
+                                //BajaHist();
                                 break;
                             case 3:
-                                //ModifProvs();
+                                //ModifHist();
                                 break;
                             case 4:
-                                //ListadoProvs();
+                                //ListadoHist();
                                 break;
                             case 5:
                                 menu();
@@ -141,26 +145,6 @@ void menu(){
     }while (opcion!=5);
 }
 
-void AltaPresu(){
-    FILE *pf;
-    Presupuesto presu;
-    pf = fopen("Presupuesto.dat","ab");
-    printf("Ingrese Código\n");
-    scanf("%i",&presu.codigo);
-    printf("Ingrese Fecha\n");
-    scanf("%s",presu.fecha);
-    printf("Ingrese CUIT\n");
-    scanf("%s",presu.cuit);
-    printf("Ingrese Total\n");
-    scanf("%f",&presu.total);
-    printf("Ingrese Descuento\n");
-    scanf("%f",&presu.descuento);
-    fseek(pf,0L,SEEK_END);
-    fwrite(&presu,sizeof(Presupuesto),1,pf);
-    fclose(pf);
-    system("clear");
-    menu();
-}
 
 void ListadoPresu(){
     FILE *pf;
@@ -250,7 +234,7 @@ void AltaAlojs(){
     menu();
 }
 
-void ListadoProds(){
+void ListadoAlojs(){
     FILE *pf;
     Alojamiento prod;
     pf = fopen("Alojamientos.dat","rb");
@@ -262,7 +246,7 @@ void ListadoProds(){
     fclose(pf);
 }
 
-void ModifProds(){
+void ModifAlojs(){
     FILE *pf,*pfaux;
     Alojamiento prod;
     int codigoaux;
@@ -295,7 +279,7 @@ void ModifProds(){
     rename("Alojamientosaux.dat","Alojamientos.dat");
 }
 
-void BajaProds(){
+void BajaAlojs(){
     FILE *pf,*pfaux;
     Alojamiento prod;
     int codigoaux;
