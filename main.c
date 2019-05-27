@@ -231,7 +231,7 @@ void AltaHist(){
         return;
     }
 
-    printf("Ingrese la fecha en la que el alojamiento será realizado\n");
+    printf("Ingrese la fecha en la que el alojamiento fue realizado\n");
     scanf("%s", &hist.fecha);
 
     fseek(pf,0L,SEEK_END);
@@ -246,11 +246,11 @@ void ListadoHist(){
     FILE *pf;
     Historico hist;
     pf = fopen("Alojamientos.dat","rb");
-    fread(&hist,sizeof(Alojamiento),1,pf);
+    fread(&hist,sizeof(Historico),1,pf);
     while(!feof(pf)){
         printf("%i ; %lf ; %i ; %s ;\n",hist.id, hist.precio,
                hist.calificacion,  hist.fecha);
-        fread(&hist,sizeof(Alojamiento), 1, pf);
+        fread(&hist,sizeof(Historico), 1, pf);
     }
     fclose(pf);
 }
@@ -263,7 +263,7 @@ void ModifHist(){
     pfaux = fopen("Alojamientosaux.dat","ab");
     printf("Ingrese Código\n");
     scanf("%i",&codigoaux);
-    fread(&hist,sizeof(Alojamiento),1,pf);
+    fread(&hist,sizeof(Historico),1,pf);
         while (!feof(pf)){
                 if (hist.id != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
@@ -276,36 +276,36 @@ void ModifHist(){
                     printf("Ingrese la fecha\n");
                     scanf("%s",&hist.fecha);
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&hist,sizeof(Alojamiento),1,pfaux);
+                    fwrite(&hist,sizeof(Historico),1,pfaux);
                 }
-            fread(&hist,sizeof(Alojamiento),1,pf);
+            fread(&hist,sizeof(Historico),1,pf);
         }
     fclose(pf);
     fclose(pfaux);
-    remove("Alojamientos.dat");
-    rename("Alojamientosaux.dat","Alojamientos.dat");
+    remove("Historicos.dat");
+    rename("Historicosaux.dat","Historicos.dat");
 }
 
 void BajaHist(){
     FILE *pf,*pfaux;
-    Alojamiento stay;
+    Historico hist;
     int codigoaux;
-    pf = fopen("Alojamientos.dat","rb");
-    pfaux = fopen("Alojamientosaux.dat","ab");
+    pf = fopen("Historicos.dat","rb");
+    pfaux = fopen("Historicosaux.dat","ab");
     printf("Ingrese Código\n");
     scanf("%i",&codigoaux);
-    fread(&stay,sizeof(Alojamiento),1,pf);
+    fread(&hist,sizeof(Historico),1,pf);
         while (!feof(pf)){
-                if (stay.id != codigoaux){
+                if (hist.id != codigoaux){
                     fseek(pfaux,0l,SEEK_END);
-                    fwrite(&stay,sizeof(Alojamiento),1,pfaux);
+                    fwrite(&hist,sizeof(Historico),1,pfaux);
                 }
-            fread(&stay,sizeof(Alojamiento),1,pf);
+            fread(&hist,sizeof(Historico),1,pf);
         }
     fclose(pf);
     fclose(pfaux);
-    remove("Alojamientos.dat");
-    rename("Alojamientosaux.dat","Alojamientos.dat");
+    remove("Historicos.dat");
+    rename("Historicosaux.dat","HIstoricos.dat");
 }
 
 // ------------ FIN DE CRUD HISTÓRICO --------------------------
