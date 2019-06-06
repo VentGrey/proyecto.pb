@@ -5,7 +5,8 @@
 
 // -- Estrucuras
 // Es una herejía usar el typedef aquí, pero por cuestiones de tiempo y
-// maleabilidad será mejor.
+// maleabilidad será mejor, como pro-tip, las estructuras se deben
+// accesar con flechas, no typedefs.
 typedef struct{
         int id;
         char latitud[20];
@@ -43,6 +44,14 @@ int main()
         return 0;
 }
 
+
+/*
+ * La función menú es muy simple, tenemos dos enteros
+ * que actuarán como disparadores de dos switch case más abajo.
+ * Primero se le preguntará al usuario con qué objetos desea interactuar
+ * eso lo manejará el case 1 y con el case 2 se enviará a las opciones
+ * correspondientes dependiendo de la elección del usuario.
+ * */
 void menu()
 {
         int opcion,opcion2;
@@ -115,6 +124,18 @@ void menu()
 
 // ------------ INICIO DE CRUD ALOJAMIENTOS --------------------------
 
+
+/*
+ * La función de alta de alojamientos crea un archivo de alojamientos
+ * de tipo binario y almacena la información ingresada por el usuario.
+ *
+ * Mediante el uso de fseek (que mide los archivos por carácteres) revisamos
+ * el final del archivo, luego escribimos los datos utilizando fwrite y
+ * finalmente cerramos los archivos para que no se muera la memoria.
+ *
+ * Llamamos a menu para que el programa le de la opción de hacer más cositas
+ * al usuario
+  */
 void AltaAlojs()
 {
         FILE *pf;
@@ -145,6 +166,10 @@ void AltaAlojs()
         menu();
 }
 
+/*
+ * La función de listado abre el archivo de alojamientos y mientras que no
+ * lleguemos al final del archivo (feof) el ciclo while comenzará a imprimir
+ * todos los registros existentes en el archivo .dat*/
 void ListadoAlojs()
 {
         FILE *pf;
@@ -159,6 +184,17 @@ void ListadoAlojs()
         fclose(pf);
 }
 
+/*
+ * Para la modificación de los archivos necesitaremos el "doble" de variables
+ * en este caso un puntero auxiliar y un archiv auxiliar. El proceso es similar
+ * al de altas, pues solo tendremos que pedirle al usuario que ingrese en
+ * formato INT el ID de algún alojamiento registrado, y si dicho ID hace
+ * match con cualquier ID existente en el archivo se volverán a pedir los
+ * datos correspondientes.
+ *
+ * Finalmente los nuevos datos se escriben en el archivo auxiliar, luego
+ * borramos el archivo anterior y renombramos el archivo auxiliar.
+  */
 void ModifAlojs()
 {
         FILE *pf,*pfaux;
@@ -196,6 +232,19 @@ void ModifAlojs()
         rename("Alojamientosaux.dat","Alojamientos.dat");
 }
 
+/*
+ * La baja de alojamientos requiere de lo mismo que la
+ * modificación, pues vamos a reemplazar archivos de nuevo.
+ *
+ * Volvemos a pedir el ID de algún alojamiento y si el ID
+ * ingresado coincide con cualquiera de los ID's registrados
+ * se eliminará la entrada del ID hasta encontrar el final de
+ * la misma.
+ *
+ * Una vez eliminada la entrada cerramos nuestros punteros archivo
+ * y eliminamos el archivo anterior para renombrar el archivo auxiliar como
+ * original
+  */
 void BajaAlojs()
 {
         FILE *pf,*pfaux;
@@ -227,6 +276,14 @@ void BajaAlojs()
 
 
 // ------------ INICIO DE CRUD HISTÓRICO --------------------------
+
+/*
+ * No tiene sentido explicar estas funciones puesto que son un
+ * vil copy-pasta de las funciones en el CRUD de alojamientos
+ * solo reacomodadas con las variables del histórico, la estructura
+ * histórico al poseer un ID hace que las funciones de búsqueda
+ * no tengan que modificarse del todo. */
+
 void AltaHist()
 {
         FILE *pf;
